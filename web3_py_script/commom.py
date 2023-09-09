@@ -1,5 +1,6 @@
 from web3 import Web3
 from web3.middleware import construct_sign_and_send_raw_middleware
+from web3.contract import Contract
 import json
 import os
 
@@ -16,7 +17,7 @@ w3_contract_instance = {}
 def get_w3():
     return w3
 
-def get_contract(contract_address: str, contract_name: str):
+def get_contract(contract_address: str, contract_name: str) -> Contract:
     with open(API_OUT_PATH + contract_name + '.sol/' + contract_name + '.json', 'rb') as f:
         abi = json.load(f)['abi']
     contract = w3.eth.contract(address=contract_address, abi=abi)
